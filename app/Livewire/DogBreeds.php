@@ -17,7 +17,7 @@ class DogBreeds extends Component
     public function mount()
     {
         // Fetch all available breeds
-        $response = Http::get('https://dog.ceo/api/breeds/list/all');
+        $response = Http::withoutVerifying()->get('https://dog.ceo/api/breeds/list/all');
         if ($response->successful()) {
             $this->breeds = array_keys($response->json()['message']);
         }
@@ -32,7 +32,7 @@ class DogBreeds extends Component
         $this->loading = true;
 
         // Fetch random images based on the selected breed
-        $response = Http::get("https://dog.ceo/api/breed/{$this->selectedBreed}/images/random/6");
+        $response = Http::withoutVerifying()->get("https://dog.ceo/api/breed/{$this->selectedBreed}/images/random/6");
 
         // Set loading state to false after API call
         $this->loading = false;
